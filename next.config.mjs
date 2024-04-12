@@ -6,7 +6,11 @@ const nextConfig = BuilderDevTools()(
     BuilderDevTools()(
       BuilderDevTools()(
         BuilderDevTools()(
-          BuilderDevTools()(BuilderDevTools()(BuilderDevTools()({})))
+          BuilderDevTools()(
+            BuilderDevTools()(
+              BuilderDevTools()(BuilderDevTools()(BuilderDevTools()({})))
+            )
+          )
         )
       )
     )
