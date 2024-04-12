@@ -744,7 +744,7 @@ function MyComponent() {
                   Nailing it
                 </div>
                 <div className="mt-6 text-lg leading-7">
-                  Discover helpful content and practical  insights to help you
+                  Discover helpful content and practical insights to help you
                   build better.
                 </div>
                 <div className="flex flex-col justify-center mt-6 text-xl text-stone-900">
