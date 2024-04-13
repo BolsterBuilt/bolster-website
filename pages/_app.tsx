@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app'
+import "pages/globals.css";
 
 import { builder } from '@builder.io/react'
 import builderConfig from '@config/builder'
