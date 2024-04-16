@@ -42,7 +42,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js"
-  ],
+, "pages/blog/[handle].tsx"  ],
   "exclude": [
     "node_modules"
   ]
