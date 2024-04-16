@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import "pages/globals.css";
+import { HubspotProvider } from 'next-hubspot';
 
 import { Builder, builder } from '@builder.io/react'
 import builderConfig from '@config/builder'
@@ -20,5 +21,9 @@ Builder.registerComponent(HubspotForm, {
 });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <HubspotProvider>
+      <Component {...pageProps} />
+    </HubspotProvider>
+  )
 }

@@ -1,6 +1,7 @@
 // HubspotForm.tsx
 import React from 'react';
 import { useHubspotForm } from 'next-hubspot';
+import { HubspotProvider } from 'next-hubspot';
 
 // Define the types for the component's props
 interface HubspotFormProps {
