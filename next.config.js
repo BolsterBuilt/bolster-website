@@ -1,7 +1,7 @@
-const withBuilderDevTools = require('@builder.io/dev-tools/next')();
+const withBuilderDevTools = require('@builder.io/dev-tools/next')()
 const bundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: !!process.env.BUNDLE_ANALYZE,
-});
+})
 
 module.exports = withBuilderDevTools(
   bundleAnalyzer({
@@ -13,18 +13,18 @@ module.exports = withBuilderDevTools(
         {
           source: '/:path*',
           headers: [
+            // this will allow site to be framed under builder.io for wysiwyg editing
             {
               key: 'Content-Security-Policy',
-              value: process.env.NODE_ENV === 'development'
-                ? "script-src 'self' 'unsafe-eval' https://js.hsforms.net;"
-                : "script-src 'self' https://js.hsforms.net;",
+              value: 'frame-ancestors https://*.builder.io https://builder.io',
             },
           ],
         },
-      ];
+      ]
     },
     env: {
+      // expose env to the browser
       BUILDER_PUBLIC_KEY: process.env.BUILDER_PUBLIC_KEY,
     },
   })
-);
+)
