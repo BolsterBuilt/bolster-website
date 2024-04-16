@@ -63,6 +63,7 @@ const Page: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <BuilderComponent model="blog-template" content={articleTemplate} data={{ article: articleData?.data }} />
+      <BuilderComponent model="footer" />
     </>
   );
 };

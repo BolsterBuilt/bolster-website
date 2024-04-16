@@ -73,6 +73,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
       </Head>
       {/* Render the Builder page */}
       <BuilderComponent model="page" content={page || undefined} />
+      <BuilderComponent model="footer" />
     </>
   )
 }
