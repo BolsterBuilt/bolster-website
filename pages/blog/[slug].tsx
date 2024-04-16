@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import DefaultErrorPage from 'next/error';
 import { Builder, BuilderComponent } from '@builder.io/react';
+import '@builder.io/widgets';
 
 builder.init('3c43d1e5501c48e2896654e6368e313f');
 
