@@ -5,7 +5,7 @@ import Head from 'next/head';
 import DefaultErrorPage from 'next/error';
 import { Builder, BuilderComponent } from '@builder.io/react';
 
-builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!)
+builder.init('3c43d1e5501c48e2896654e6368e313f');
 
 export const getStaticProps = async ({
   params,
