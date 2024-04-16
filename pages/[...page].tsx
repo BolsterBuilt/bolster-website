@@ -6,8 +6,8 @@ import Head from 'next/head'
 import { BuilderContent } from '@builder.io/sdk'
 import { GetStaticProps } from 'next'
 import '../builder-registry'
-import '@builder.io/widgets';
-
+import dynamic from 'next/dynamic';
+import '@builder.io/widgets'
 
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!)
