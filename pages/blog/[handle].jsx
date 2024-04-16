@@ -1,24 +1,17 @@
-// pages/blog/[handle].tsx
-import { builder, BuilderComponent, BuilderContent, useIsPreviewing } from "@builder.io/react";
+// pages/blog/[handle].jsx
+import {
+  builder,
+  BuilderComponent,
+  BuilderContent,
+  useIsPreviewing,
+} from "@builder.io/react";
 import React from 'react';
 import Head from "next/head";
 import DefaultErrorPage from "next/error";
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { ParsedUrlQuery } from 'querystring';
 
-builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!)
 
-interface BlogArticleProps {
-  article: any | null;
-}
-
-interface IParams extends ParsedUrlQuery {
-  handle: string;
-}
-
-const BlogArticle: React.FC<BlogArticleProps> = ({ article }) => {
+function BlogArticle({ article }) {
   const isPreviewing = useIsPreviewing();
-
   if (!article && !isPreviewing) {
     return (
       <>
@@ -30,44 +23,44 @@ const BlogArticle: React.FC<BlogArticleProps> = ({ article }) => {
     );
   }
 
-  if (!article) {
-    return <div>No article found.</div>;
-  }
-
   return (
     <BuilderContent
       content={article}
       options={{ includeRefs: true }}
       model="blog-article"
     >
-      {(data: any, loading?: boolean, fullContent: any = {}): JSX.Element => (
-        <>
+      {(data, loading, fullContent) => (
+        <React.Fragment>
           <Head>
+            {/* Render meta tags from custom field */}
             <title>{data?.title}</title>
             <meta name="description" content={data?.blurb} />
             <meta name="og:image" content={data?.image} />
           </Head>
+
           <div>
-            <div>{data.title}</div>
+            <div>{data?.title}</div>
+            {/* Render the Builder drag/drop'd content */}
             <BuilderComponent
               name="blog-article"
               content={fullContent}
               options={{ includeRefs: true }}
             />
           </div>
-        </>
+        </React.Fragment>
       )}
     </BuilderContent>
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { handle } = params as IParams;
+export async function getStaticProps({ params }) {
   const article = await builder
     .get("blog-article", {
+      // Include references, like our `author` ref
       options: { includeRefs: true },
       query: {
-        "data.handle": handle,
+        // Get the specific article by handle
+        "data.handle": params.handle,
       },
     })
     .promise() || null;
@@ -80,7 +73,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
   return {
     paths: [],
     fallback: true,

@@ -40,9 +40,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "**/*.js"
-, "pages/blog/[handle].tsx"  ],
+    "**/*.tsx"
+  ],
   "exclude": [
     "node_modules"
   ]
