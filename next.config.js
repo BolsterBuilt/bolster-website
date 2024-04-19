@@ -7,7 +7,7 @@ module.exports = {
     return [
       {
         source: '/',
-        destination: '/bolster-home',
+        destination: '/home',
         permanent: true,
       },
     ]
