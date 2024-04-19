@@ -2,6 +2,17 @@ const withBuilderDevTools = require('@builder.io/dev-tools/next')()
 const bundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: !!process.env.BUNDLE_ANALYZE,
 })
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/bolster-home',
+        permanent: true,
+      },
+    ]
+  },
+}
 
 module.exports = withBuilderDevTools(
   bundleAnalyzer({

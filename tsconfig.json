@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./bolster-home",
+    "baseUrl": ".",
     "target": "esnext",
     "lib": [
       "dom",
