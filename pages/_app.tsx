@@ -24,6 +24,8 @@ Builder.registerComponent(HubspotForm, {
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <HubspotProvider>
+      <SpeedInsights />
+      <Analytics />
       <Component {...pageProps} />
     </HubspotProvider>
   )
