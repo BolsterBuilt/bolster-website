@@ -1,7 +1,8 @@
 import type { AppProps } from 'next/app'
 import "pages/globals.css";
 import { HubspotProvider } from 'next-hubspot';
-
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Builder, builder } from '@builder.io/react'
 import builderConfig from '@config/builder'
 builder.init(builderConfig.apiKey)
