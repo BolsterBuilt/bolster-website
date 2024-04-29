@@ -11,7 +11,7 @@ interface ArticleData {
   title: string;
   blurb: string;
   slug: string;
-  category: string;  // Ensure your Builder.io model includes this field
+  category: string;
 }
 
 interface Article {
@@ -20,31 +20,32 @@ interface Article {
 }
 
 const ArticlesContainer: React.FC = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);  // All articles, should not be overwritten after initial fetch
+  const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);  // Only filtered articles
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [categories, setCategories] = useState<string[]>(['All']);
 
   useEffect(() => {
-    builder.getAll('article')
-      .then(response => {
-        const formattedArticles: Article[] = response.map(item => ({
-          id: item.id ?? 'default-id',
-          data: {
-            image: item.data?.image ?? 'default-image.jpg',
-            altText: item.data?.altText ?? 'No image description available',
-            readtime: item.data?.readtime ?? 'No reading time specified',
-            title: item.data?.title ?? 'No title available',
-            blurb: item.data?.blurb ?? 'No description available',
-            slug: item.data?.slug ?? '#',
-            category: item.data?.category ?? 'Uncategorized'
-          }
-        }));
-        setArticles(formattedArticles);
-        setFilteredArticles(formattedArticles);  // Initialize with all articles
-      })
-      .catch(err => {
-        console.error('Error fetching articles:', err);
-      });
+    builder.getAll('article').then(response => {
+      const formattedArticles: Article[] = response.map(item => ({
+        id: item.id ?? 'default-id',
+        data: {
+          image: item.data?.image ?? 'default-image.jpg',
+          altText: item.data?.altText ?? 'No image description available',
+          readtime: item.data?.readtime ?? 'No reading time specified',
+          title: item.data?.title ?? 'No title available',
+          blurb: item.data?.blurb ?? 'No description available',
+          slug: item.data?.slug ?? '#',
+          category: item.data?.category ?? 'Uncategorized'
+        }
+      }));
+      setArticles(formattedArticles);
+      setFilteredArticles(formattedArticles);  // Initialize with all articles
+      const uniqueCategories = Array.from(new Set(formattedArticles.map(a => a.data.category)));
+      setCategories(['All', ...uniqueCategories]);
+    }).catch(err => {
+      console.error('Error fetching articles:', err);
+    });
   }, []);
 
   useEffect(() => {
@@ -60,17 +61,15 @@ const ArticlesContainer: React.FC = () => {
   };
 
   return (
-    <div className=''>
-      <select className="text-black" onChange={handleCategoryChange} value={selectedCategory}>
-        <option value="All">All Categories</option>
-        <option value="Technology">Technology</option>
-        <option value="Business">Business</option>
-        <option value="Lifestyle">Lifestyle</option>
-        {/* Add more categories as needed or fetch dynamically if applicable */}
+    <div className='p-10 bg-white'>
+      <select className="p-2 text-black rounded border bg-white shadow" onChange={handleCategoryChange} value={selectedCategory}>
+        {categories.map(category => (
+          <option key={category} value={category}>{category}</option>
+        ))}
       </select>
-      <div className="flex flex-wrap -mx-2">
+      <div className="flex flex-wrap h-full -mx-2">
         {filteredArticles.map(article => (
-          <div key={article.id} className="px-2 w-full sm:w-1/2 md:w-1/3">
+          <div key={article.id} className="p-2 w-full h-full sm:w-1/2 md:w-1/3">
             <ArticleCard
               image={article.data.image}
               altText={article.data.altText}

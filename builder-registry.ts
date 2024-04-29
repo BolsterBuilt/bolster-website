@@ -114,3 +114,42 @@ Builder.registerComponent(
     name: 'BlogArchive',
   }
 )
+
+Builder.registerComponent(
+  dynamic(() => import('./components/ArticleCard')),
+  {
+    name: 'ArticleCard',
+    inputs: [
+      {
+        name: 'altText',
+        type: 'string',
+        required: true,
+      },
+      {
+        name: 'blurb',
+        type: 'string',
+        required: true,
+      },
+      {
+        name: 'image',
+        type: 'string',
+        required: true,
+      },
+      {
+        name: 'readtime',
+        type: 'string',
+        required: true,
+      },
+      {
+        name: 'slug',
+        type: 'string',
+        required: true,
+      },
+      {
+        name: 'title',
+        type: 'string',
+        required: true,
+      },
+    ],
+  }
+)
