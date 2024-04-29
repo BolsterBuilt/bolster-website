@@ -15,3 +15,102 @@ Builder.registerComponent(
     ],
   }
 )
+
+Builder.registerComponent(
+  dynamic(() => import('./pages/_app')),
+  {
+    name: 'MyApp',
+    inputs: [
+      {
+        name: '__N_SSG',
+        type: 'boolean',
+      },
+      {
+        name: '__N_SSP',
+        type: 'boolean',
+      },
+      {
+        name: 'Component',
+        type: 'string',
+        meta: {
+          ts: 'NextComponentType<NextPageContext, any, any>',
+        },
+        required: true,
+      },
+      {
+        name: 'pageProps',
+        type: 'string',
+        meta: {
+          ts: 'PageProps',
+        },
+        required: true,
+      },
+      {
+        name: 'router',
+        type: 'string',
+        meta: {
+          ts: 'Router',
+        },
+        required: true,
+      },
+    ],
+  }
+)
+
+Builder.registerComponent(
+  dynamic(async () => (await import('./components/Link/Link')).Link),
+  {
+    name: 'Link',
+  }
+)
+
+Builder.registerComponent(
+  dynamic(() => import('./components/HubspotForm')),
+  {
+    name: 'HubspotForm',
+    inputs: [
+      {
+        name: 'formId',
+        type: 'string',
+        required: true,
+      },
+      {
+        name: 'portalId',
+        type: 'string',
+        required: true,
+      },
+    ],
+  }
+)
+
+Builder.registerComponent(
+  dynamic(() => import('./pages/[...page]')),
+  {
+    name: 'Page',
+    inputs: [
+      {
+        name: 'page',
+        type: 'object',
+        hideFromUI: true,
+        meta: {
+          ts: 'BuilderContent',
+        },
+        required: true,
+      },
+    ],
+  }
+)
+
+Builder.registerComponent(
+  dynamic(() => import('./pages/blog/[slug]')),
+  {
+    name: 'Page',
+  }
+)
+
+Builder.registerComponent(
+  dynamic(() => import('./components/ArticlesContainer')),
+  {
+    name: 'BlogArchive',
+  }
+)

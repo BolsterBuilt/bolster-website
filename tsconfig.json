@@ -29,7 +29,7 @@
         "config/*"
       ],
       "@components/*": [
-        "components*"
+        "components/*"
       ],
       "@utils/*": [
         "utils/*"

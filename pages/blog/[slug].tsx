@@ -10,7 +10,7 @@ builder.init('3c43d1e5501c48e2896654e6368e313f');
 
 export const getStaticProps = async ({
   params,
-}: GetStaticPropsContext<{ slug: string }>) => {  // Notice the type change here
+}: GetStaticPropsContext<{ slug: string }>) => {
   const slug = params?.slug || '';
   const articleData = await builder.get('article', { query: { 'data.slug': slug } }).toPromise() || null;
   const articleTemplate = await builder.get('blog-template', { options: { enrich: true } }).toPromise();

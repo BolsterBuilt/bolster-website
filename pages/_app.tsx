@@ -5,14 +5,12 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Builder, builder } from '@builder.io/react'
 import builderConfig from '@config/builder'
+
 builder.init(builderConfig.apiKey)
-// Import Builder.io SDK and the necessary tools
 
 
-// Import your custom component
 import HubspotForm from '../components/HubspotForm';
 
-// Register the component
 Builder.registerComponent(HubspotForm, {
   name: 'HubSpotForm',
   inputs: [
