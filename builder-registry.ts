@@ -109,13 +109,6 @@ Builder.registerComponent(
 )
 
 Builder.registerComponent(
-  dynamic(() => import('./components/ArticlesContainer')),
-  {
-    name: 'BlogArchive',
-  }
-)
-
-Builder.registerComponent(
   dynamic(() => import('./components/ArticleCard')),
   {
     name: 'ArticleCard',
@@ -151,5 +144,19 @@ Builder.registerComponent(
         required: true,
       },
     ],
+  }
+)
+
+Builder.registerComponent(
+  dynamic(() => import('./components/ArticlesContainer')),
+  {
+    name: 'ArticlesContainer',
+  }
+)
+
+Builder.registerComponent(
+  dynamic(() => import('./components/shareButtons')),
+  {
+    name: 'ShareButtons',
   }
 )

@@ -18,12 +18,13 @@ interface Article {
   id: string;
   data: ArticleData;
 }
-
 const ArticlesContainer: React.FC = () => {
-  const [articles, setArticles] = useState<Article[]>([]);  // All articles, should not be overwritten after initial fetch
-  const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);  // Only filtered articles
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
+  const [displayCount, setDisplayCount] = useState(6);  // Initial number of articles to display
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [categories, setCategories] = useState<string[]>(['All']);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     builder.getAll('article').then(response => {
@@ -40,36 +41,36 @@ const ArticlesContainer: React.FC = () => {
         }
       }));
       setArticles(formattedArticles);
-      setFilteredArticles(formattedArticles);  // Initialize with all articles
+      setFilteredArticles(formattedArticles.slice(0, displayCount));
       const uniqueCategories = Array.from(new Set(formattedArticles.map(a => a.data.category)));
       setCategories(['All', ...uniqueCategories]);
     }).catch(err => {
       console.error('Error fetching articles:', err);
     });
   }, []);
-
   useEffect(() => {
-    if (selectedCategory === 'All') {
-      setFilteredArticles(articles);
-    } else {
-      setFilteredArticles(articles.filter(article => article.data.category === selectedCategory));
-    }
-  }, [selectedCategory, articles]);
+    const filtered = selectedCategory === 'All' ? articles : articles.filter(article => article.data.category === selectedCategory);
+    setFilteredArticles(filtered.slice(0, displayCount));
+  }, [selectedCategory, articles, displayCount]);
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(event.target.value);
+    setDisplayCount(6);
   };
 
+  const loadMoreArticles = () => {
+    setDisplayCount(prevCount => prevCount + 6);
+  };
   return (
-    <div className='p-10 bg-white'>
+    <div>
       <select className="p-2 text-black rounded border bg-white shadow" onChange={handleCategoryChange} value={selectedCategory}>
         {categories.map(category => (
           <option key={category} value={category}>{category}</option>
         ))}
       </select>
-      <div className="flex flex-wrap h-full -mx-2">
+      <div className="flex flex-wrap -mx-2">
         {filteredArticles.map(article => (
-          <div key={article.id} className="p-2 w-full h-full sm:w-1/2 md:w-1/3">
+          <div key={article.id} className="p-2 w-full sm:w-1/2 md:w-1/3">
             <ArticleCard
               image={article.data.image}
               altText={article.data.altText}
@@ -81,6 +82,11 @@ const ArticlesContainer: React.FC = () => {
           </div>
         ))}
       </div>
+      {currentPage < filteredArticles.length && (
+        <button onClick={loadMoreArticles} className="flex justify-center mt-4 text-xl font-bold cursor-pointer pointer-events-auto text-stone-900">
+          Load More
+        </button>
+      )}
     </div>
   );
 };
