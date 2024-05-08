@@ -56,7 +56,7 @@ export default function Page({ page }: { page: BuilderContent | null }) {
     <>
       <Head>
         <title>{page?.data?.title}</title>
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="https://github.com/CoRb1n/bolster2/blob/8564b8e3a28073b5067fc8af3d3c2b3cf78e9ea4/favicon.png" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <BuilderComponent model="page" content={page || undefined} />
