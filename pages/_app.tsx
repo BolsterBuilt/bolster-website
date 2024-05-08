@@ -33,7 +33,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>My App</title>
-        <link rel="icon" href="https://github.com/CoRb1n/bolster2/blob/8564b8e3a28073b5067fc8af3d3c2b3cf78e9ea4/favicon.png" />
+        <link rel="icon" href="https://raw.githubusercontent.com/CoRb1n/bolster2/8564b8e3a28073b5067fc8af3d3c2b3cf78e9ea4/favicon.png" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <HubspotProvider>
