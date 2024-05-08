@@ -21,7 +21,7 @@ interface Article {
 const ArticlesContainer: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [filteredArticles, setFilteredArticles] = useState<Article[]>([]);
-  const [displayCount, setDisplayCount] = useState(6);  // Initial number of articles to display
+  const [displayCount, setDisplayCount] = useState(6);  
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [categories, setCategories] = useState<string[]>(['All']);
   const [currentPage, setCurrentPage] = useState(1);

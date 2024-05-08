@@ -1,16 +1,24 @@
-import type { AppProps } from 'next/app'
-import "pages/globals.css";
+// First, import all necessary libraries and types
+import type { AppProps } from 'next/app';
+import Head from 'next/head'; // Import Head for adding the favicon and other head elements
+import { Builder, builder } from '@builder.io/react';
 import { HubspotProvider } from 'next-hubspot';
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { Builder, builder } from '@builder.io/react'
-import builderConfig from '@config/builder'
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
-builder.init(builderConfig.apiKey)
+// Import global styles
+import "pages/globals.css";
 
-
+// Import your custom components
 import HubspotForm from '../components/HubspotForm';
 
+// Import configuration for Builder.io
+import builderConfig from '@config/builder';
+
+// Initialize Builder.io with your API key
+builder.init(builderConfig.apiKey);
+
+// Register custom components with Builder.io
 Builder.registerComponent(HubspotForm, {
   name: 'HubSpotForm',
   inputs: [
@@ -19,12 +27,20 @@ Builder.registerComponent(HubspotForm, {
   ]
 });
 
+// Define the main App component
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <HubspotProvider>
-      <SpeedInsights />
-      <Analytics />
-      <Component {...pageProps} />
-    </HubspotProvider>
-  )
+    <>
+      <Head>
+        <title>My App</title>
+        <link rel="icon" href="/favicon.png" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <HubspotProvider>
+        <SpeedInsights />
+        <Analytics />
+        <Component {...pageProps} />
+      </HubspotProvider>
+    </>
+  );
 }

@@ -56,6 +56,8 @@ export default function Page({ page }: { page: BuilderContent | null }) {
     <>
       <Head>
         <title>{page?.data?.title}</title>
+        <link rel="icon" href="/favicon.png" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <BuilderComponent model="page" content={page || undefined} />
       <BuilderComponent model="footer" />
