@@ -11,8 +11,8 @@ module.exports = withBuilderDevTools(
     async redirects() {
       return [
         {
-          source: '/',
-          destination: '/home',
+          source: '/home',
+          destination: '/index.tsx',
           permanent: true,
         },
       ]
