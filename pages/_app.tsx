@@ -1,24 +1,16 @@
-// First, import all necessary libraries and types
 import type { AppProps } from 'next/app';
-import Head from 'next/head'; // Import Head for adding the favicon and other head elements
+import Head from 'next/head';
 import { Builder, builder } from '@builder.io/react';
 import { HubspotProvider } from 'next-hubspot';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-// Import global styles
 import "pages/globals.css";
 
-// Import your custom components
 import HubspotForm from '../components/HubspotForm';
 
-// Import configuration for Builder.io
 import builderConfig from '@config/builder';
 
-// Initialize Builder.io with your API key
 builder.init(builderConfig.apiKey);
-
-// Register custom components with Builder.io
 Builder.registerComponent(HubspotForm, {
   name: 'HubSpotForm',
   inputs: [
@@ -27,7 +19,6 @@ Builder.registerComponent(HubspotForm, {
   ]
 });
 
-// Define the main App component
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>

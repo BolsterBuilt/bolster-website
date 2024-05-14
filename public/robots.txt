@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://bolsterbuilt.com
+
+# Sitemaps
+Sitemap: https://bolsterbuilt.com/sitemap.xml

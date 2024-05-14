@@ -1,10 +1,20 @@
-const withBuilderDevTools = require('@builder.io/dev-tools/next')()
+const withPlugins = require('next-compose-plugins');
+const withBuilderDevTools = require('@builder.io/dev-tools/next')();
 const bundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: !!process.env.BUNDLE_ANALYZE,
-})
+});
 
-module.exports = withBuilderDevTools(
-  bundleAnalyzer({
+const nextSitemapConfig = {
+  siteUrl: process.env.SITE_URL || 'https://bolsterbuilt.com',
+  generateRobotsTxt: true,
+};
+
+module.exports = withPlugins(
+  [
+    withBuilderDevTools,
+    bundleAnalyzer,
+  ],
+  {
     images: {
       domains: ['cdn.builder.io'],
     },
@@ -19,10 +29,12 @@ module.exports = withBuilderDevTools(
             },
           ],
         },
-      ]
+      ];
     },
     env: {
       BUILDER_PUBLIC_KEY: process.env.BUILDER_PUBLIC_KEY,
     },
-  })
-)
+  }
+);
+
+module.exports.nextSitemap = nextSitemapConfig;
