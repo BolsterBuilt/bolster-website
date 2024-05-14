@@ -160,3 +160,21 @@ Builder.registerComponent(
     name: 'ShareButtons',
   }
 )
+
+Builder.registerComponent(
+  dynamic(() => import('./pages')),
+  {
+    name: 'Home',
+    inputs: [
+      {
+        name: 'page',
+        type: 'object',
+        hideFromUI: true,
+        meta: {
+          ts: 'BuilderContent',
+        },
+        required: true,
+      },
+    ],
+  }
+)

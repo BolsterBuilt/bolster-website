@@ -8,15 +8,6 @@ module.exports = withBuilderDevTools(
     images: {
       domains: ['cdn.builder.io'],
     },
-    async redirects() {
-      return [
-        {
-          source: '/',
-          destination: '/home',
-          permanent: true,
-        },
-      ]
-    },
     async headers() {
       return [
         {
