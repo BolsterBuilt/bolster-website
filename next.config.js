@@ -31,6 +31,15 @@ module.exports = withPlugins(
         },
       ];
     },
+    async redirects() {
+      return [
+        {
+          source: '/about-us',
+          destination: '/our-story',
+          permanent: true,
+        },
+      ];
+    },
     env: {
       BUILDER_PUBLIC_KEY: process.env.BUILDER_PUBLIC_KEY,
     },
